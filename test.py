@@ -3,6 +3,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from code import describe
+from code import main as main_
 from code import random_animal
 
 
@@ -51,6 +52,29 @@ class DescribeTest(TestCase):
         char = "🐈"
         description = describe(char)
         assert description == f"{char} {unicode_name.return_value}"
+
+
+class MainTest(TestCase):
+    @patch("code.random_animal", return_value="🐈")
+    def test_random_animal_is_used(self, random_animal_):
+        main_()
+        random_animal_.assert_called_once_with()
+
+    @patch("code.describe")
+    def test_describe_is_used(self, describe_):
+        main_()
+        describe_.assert_called_once()
+
+    @patch("code.describe")
+    @patch("code.random_animal")
+    def test_describe_is_used_with_random_animal(self, random_animal_, describe_):
+        main_()
+        describe_.assert_called_once_with(random_animal_.return_value)
+
+    @patch("code.describe")
+    def test_description_is_returned(self, describe_):
+        description = main_()
+        assert description == describe_.return_value
 
 
 if __name__ == "__main__":
