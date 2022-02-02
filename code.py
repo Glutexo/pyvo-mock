@@ -5,7 +5,8 @@ FILE = "animals.txt"
 
 def random_animal():
     with open(FILE) as file:
-        animals = file.read()
+        contents = file.read()
+    animals = contents.rstrip()
     return choice(animals)
 
 
