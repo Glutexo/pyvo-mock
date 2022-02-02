@@ -16,7 +16,11 @@ def describe(char):
     return f"{char} {name}"
 
 
-if __name__ == "__main__":
+def main():
     animal = random_animal()
-    description = describe(animal)
-    print(description)
+    return describe(animal)
+
+
+if __name__ == "__main__":
+    output = main()
+    print(output)
