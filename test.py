@@ -9,7 +9,8 @@ class RandomAnimalTest(TestCase):
     @staticmethod
     def _read_animals():
         with open("animals.txt") as file:
-            return file.read()
+            animals = file.read()
+        return animals.rstrip()
 
     def test_is_animal(self):
         animals = self._read_animals()
